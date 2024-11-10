@@ -35,3 +35,25 @@ To run the VirtualWear app locally, follow these steps:
    ```bash
    git clone https://github.com/yourusername/virtualwear.git
    cd virtualwear
+
+2. **Set up a virtual environment (optional but recommended)**:
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use venv\Scripts\activate
+   
+3. **Set up the API key:**
+
+   Create an account with Segmind (or the API provider you're using) and obtain an API key.
+
+5. **Run the Flask app:**
+   ```bash
+   python app.py
+6. **Open your browser and navigate to http://127.0.0.1:5000/ to use the app.**
+
+## Usage
+
+1. **Upload your image**: Use the "Upload User Image" input to upload a photo of yourself.
+2. **Upload a clothing item**: Use the "Upload Clothing Image" input to upload an image of the clothing item you want to try on.
+3. **Click "Try On"**: After uploading both images, click the "Try On" button. The app will send the images to the backend, where the Segmind API will process them and generate the try-on result.
+4. **View the result**: After processing, the result will be displayed on the screen, showing you how the clothing item fits on your image.
