@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirtualWear</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+            margin-top: 20px;
+        }
+        #tryOnForm {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #previewSection {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .preview {
+            display: inline-block;
+            width: 45%;
+        }
+        .preview img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        #loading {
+            display: none;
+            font-size: 16px;
+            color: #555;
+        }
+        #resultSection {
+            display: none;
+            margin-top: 20px;
+        }
+        #resultImage {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #0056b3;
+            border-radius: 8px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>VirtualWear</h1>
+    <form id="tryOnForm">
+        <label for="model_image">Upload User Image:</label>
+        <input type="file" id="model_image" name="model_image" accept="image/*" required>
+        
+        <label for="cloth_image">Upload Clothing Image:</label>
+        <input type="file" id="cloth_image" name="cloth_image" accept="image/*" required>
+        
+        <button type="submit">Try On</button>
+    </form>
+    
+    <div id="loading">Processing... Please wait.</div>
+    
+    <div id="previewSection">
+        <div class="preview">
+            <h3>User Preview</h3>
+            <img id="modelPreview" src="" alt="Model Image Preview" style="display:none;">
+        </div>
+        <div class="preview">
+            <h3>Clothing Preview</h3>
+            <img id="clothPreview" src="" alt="Clothing Image Preview" style="display:none;">
+        </div>
+    </div>
+    
+    <div id="resultSection">
+        <h2>Result:</h2>
+        <img id="resultImage" src="" alt="Result Image">
+    </div>
+    
+    <div id="error" class="error"></div>
+    
+    <script>
+        // Display selected image previews
+        function displayImagePreview(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        document.getElementById('model_image').addEventListener('change', function() {
+            displayImagePreview(this, 'modelPreview');
+        });
+        
+        document.getElementById('cloth_image').addEventListener('change', function() {
+            displayImagePreview(this, 'clothPreview');
+        });
+        
+        document.getElementById('tryOnForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('error').textContent = '';
+
+            const formData = new FormData();
+            formData.append('model_image', document.getElementById('model_image').files[0]);
+            formData.append('cloth_image', document.getElementById('cloth_image').files[0]);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.image) {
+                        // Show result image
+                        const resultImage = document.getElementById('resultImage');
+                        resultImage.src = `data:image/png;base64,${data.image}`;
+                        document.getElementById('resultSection').style.display = 'block';
+                    } else {
+                        document.getElementById('error').textContent = 'Error: ' + (data.error || 'Unknown error');
+                    }
+                } else {
+                    document.getElementById('error').textContent = 'Failed to process the image.';
+                }
+            } catch (error) {
+                document.getElementById('error').textContent = 'An error occurred: ' + error.message;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
