@@ -2,6 +2,10 @@
 
 **VirtualWear** is a web-based application that allows users to try on clothing virtually. It enables users to upload an image of themselves and a clothing item, then uses a third-party API to perform a virtual try-on, displaying the clothing item on the user's image.
 
+![screenshot](https://github.com/anshshori2002/VirtualWear/blob/main/Screenshot%20(33).png)
+![screenshot](https://github.com/anshshori2002/VirtualWear/blob/main/Screenshot%20(34).png)
+![screenshot](https://github.com/anshshori2002/VirtualWear/blob/main/Screenshot%20(35).png)
+
 ## Features
 
 - Upload an image of yourself (user image).
