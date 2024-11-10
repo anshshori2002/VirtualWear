@@ -6,7 +6,7 @@ from PIL import Image
 from io import BytesIO
 
 app = Flask(__name__)
-api_key = "SG_1afd12a7789c2be8"
+api_key = "api_key"
 url = "https://api.segmind.com/v1/try-on-diffusion"
 
 # Helper function to convert uploaded image files to base64
