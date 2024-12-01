@@ -1,6 +1,7 @@
 # VirtualWear
 
-**VirtualWear** is a web-based application that allows users to try on clothing virtually. It enables users to upload an image of themselves and a clothing item, then uses a third-party API to perform a virtual try-on, displaying the clothing item on the user's image.
+**VirtualWear** is a web-based application that allows users to try on clothing virtually. Users can upload an image of themselves along with a clothing item. The backend, powered by Kestra, processes the inputs and displays the clothing item on the user's image.
+
 
 ![screenshot](https://github.com/anshshori2002/VirtualWear/blob/main/Screenshot%20(33).png)
 ![screenshot](https://github.com/anshshori2002/VirtualWear/blob/main/Screenshot%20(34).png)
@@ -14,46 +15,9 @@
 - Get a virtual try-on result showing the clothing item on the user's image.
 - Simple and user-friendly interface.
 
-## Technologies Used
 
-- **Backend**: Flask (Python web framework)
-- **Frontend**: HTML, JavaScript
-- **API**: Segmind API (for clothing try-on feature)
-- **Image Handling**: PIL (Python Imaging Library), Base64 encoding
-- **Deployment**: Can be deployed on any platform supporting Python.
 
-## Installation
 
-To run the VirtualWear app locally, follow these steps:
-
-### Prerequisites
-
-- Python 3.x
-- `pip` (Python package manager)
-- An active internet connection for API requests
-
-### Steps to Install
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/yourusername/virtualwear.git
-   cd virtualwear
-
-2. **Set up a virtual environment (optional but recommended)**:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows, use venv\Scripts\activate
-   
-3. **Set up the API key:**
-
-   Create an account with Segmind (or the API provider you're using) and obtain an API key.
-
-5. **Run the Flask app:**
-   ```bash
-   python app.py
-6. **Open your browser and navigate to http://127.0.0.1:5000/ to use the app.**
 
 ## Usage
 
