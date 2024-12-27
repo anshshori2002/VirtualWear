@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "VirtualWear",
+    "version": "1.0",
+    "description": "Try on clothes virtually on any ecommerce store",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "host_permissions": [
+      "https://kwai-kolors-kolors-virtual-try-on.hf.space/*",
+      "https://api.openai.com/*"
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "128": "logo.png"
+      }
+    },
+    "icons": {
+      "128": "logo.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+  }
